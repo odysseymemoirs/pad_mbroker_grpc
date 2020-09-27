@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+service CustomerService {
+  
+    rpc Subscribe(SubscribeMessage) returns(stream SubscribeRespons) {}
+    rpc Publish(PublishMessage) returns(stream PublishRespons) {}
+
+}
+
+message Hello {
+    string message = 1;
+}
+
+message SubscribeMessage {
+    string type = 1;
+    string command = 2;
+    string moduleName = 3;
+    SubscribePayload payload = 4;
+}
+
+message SubscribePayload {
+    string topicName = 1;
+}
+
+message SubscribeRespons {
+    string type = 1;
+    int32 status = 2;
+    string payload = 3;
+}
+
+message RetrieveAllTopicsMessage {
+    string type = 1;
+    string command = 2;
+    string moduleName = 3;
+}
+
+message CreateTopicMessage {
+    string type = 1;
+    string command = 2;
+    string moduleName = 3;
+    CreateTopicPayload payload = 4;
+}
+
+message CreateTopicPayload {
+    string topicName = 1;
+}
+
+message PublishMessage {
+    string type = 1;
+    string command = 2;
+    string moduleName = 3;
+    PublishPayload payload = 4;
+}
+
+message PublishPayload {
+    string topicName = 1;
+    string message = 2;
+}
+
+message PublishRespons {
+    string message = 1;
+    string from = 2;
+    string topic = 3;
+}
+
+
+message Empty {}
+
